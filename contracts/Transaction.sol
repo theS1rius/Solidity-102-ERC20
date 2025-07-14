@@ -17,35 +17,40 @@ import "https://github.com/Uniswap/v4-periphery/src/V4Router.sol";
 
 // 3、 實作 Uniswap 交易 ETH / USDC（測試網版本）
 contract Transaction {
+
+    IERC20 public USDC;
+
     // Sepolia addresses
     address public constant UNISWAP_POOLMANAGER_SEPOLIA = 0xC532a74256D3Db42D0Bf7a0400fEFDbad7694008;
     address public constant USDC_ADDRESS_SEPOLIA = 0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238;
 
-    address UNISWAP_ROUTER;
-    address USDC_ADDRESS;
-
-    IERC20 usdcToken;
+    address public USDC_ADDRESS;
     
     // Contract owner
     address public owner;
 
     // Events
-    event ContractDeployed(address owner, address UNISWAP_ROUTER, address USDC_ADDRESS);
+    event ContractDeployed (address owner, address USDC_ADDRESS);
     
     constructor() {
         owner = msg.sender;
         
-        UNISWAP_ROUTER = UNISWAP_POOLMANAGER_SEPOLIA;
         USDC_ADDRESS = USDC_ADDRESS_SEPOLIA;
+        USDC = IERC20(USDC_ADDRESS);
         
-        usdcToken = IERC20(USDC_ADDRESS);
-        
-        emit ContractDeployed(owner, UNISWAP_ROUTER, USDC_ADDRESS);
+        emit ContractDeployed(owner, USDC_ADDRESS);
     }
-    
-    // receive ETH function
-    receive() external payable {}
-    
-    // fallback function
-    fallback() external payable {}
+
+    modifier onlyOwner() {
+        require (msg.sender == owner, "Only owner can do this.");
+        _;
+    }
+
+    function executeSwap (uint16 balanceOfETH) public view onlyOwner returns (uint16 gainOfUSDC, uint256) {
+        // require (USDC.balanceOf(address(this)) >= balanceOfETH, "Insufficient ETH.");
+
+        gainOfUSDC = balanceOfETH * 3039;
+
+        return (gainOfUSDC, USDC.balanceOf(address(this)));
+    }
 }
