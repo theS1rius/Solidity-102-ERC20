@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "https://github.com/Uniswap/v4-periphery/src/V4Router.sol";
+import {IPoolManager} from "@uniswap/v4-core/src/interfaces/IPoolManager.sol";
+
+import {V4Router} from "@uniswap/v4-periphery/src/V4Router.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 /** 
     1、 什麼是重入攻擊? 如何預防?
@@ -16,9 +18,7 @@ import "https://github.com/Uniswap/v4-periphery/src/V4Router.sol";
 */ 
 
 // 3、 實作 Uniswap 交易 ETH / USDC（測試網版本）
-contract Transaction {
-
-    IERC20 public USDC;
+contract Transaction is ReentrancyGuard {
 
     // Sepolia addresses
     address public constant UNISWAP_POOLMANAGER_SEPOLIA = 0xC532a74256D3Db42D0Bf7a0400fEFDbad7694008;
@@ -31,12 +31,11 @@ contract Transaction {
 
     // Events
     event ContractDeployed (address owner, address USDC_ADDRESS);
+    event log (string log);
     
     constructor() {
         owner = msg.sender;
-        
         USDC_ADDRESS = USDC_ADDRESS_SEPOLIA;
-        USDC = IERC20(USDC_ADDRESS);
         
         emit ContractDeployed(owner, USDC_ADDRESS);
     }
@@ -46,11 +45,22 @@ contract Transaction {
         _;
     }
 
-    function executeSwap (uint16 balanceOfETH) public view onlyOwner returns (uint16 gainOfUSDC, uint256) {
-        // require (USDC.balanceOf(address(this)) >= balanceOfETH, "Insufficient ETH.");
+    function executeSwap (
+        uint256 balanceOfETH
+        ) public onlyOwner nonReentrant returns (
+        uint256 userETH,
+        uint256 gainOfUSDC
+        ) {
+        require (getUserBalance() >= balanceOfETH, "Insufficient ETH.");
+        userETH = getUserBalance();
 
         gainOfUSDC = balanceOfETH * 3039;
 
-        return (gainOfUSDC, USDC.balanceOf(address(this)));
+        return (userETH, gainOfUSDC);
+    }
+
+    // get user ETH balance
+    function getUserBalance() public view returns (uint256) {
+        return msg.sender.balance;
     }
 }
