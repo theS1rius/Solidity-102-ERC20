@@ -1,0 +1,11 @@
+{
+    "wake.compiler.solc.remappings": [
+        "@openzeppelin/=node_modules/@openzeppelin/",
+        "@uniswap/=node_modules/@uniswap/",
+        "ds-test/=node_modules/@uniswap/v4-core/lib/solmate/lib/ds-test/",
+        "erc4626-tests/=node_modules/@uniswap/v4-core/lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=node_modules/@uniswap/v4-core/lib/forge-std/",
+        "openzeppelin-contracts/=node_modules/@uniswap/v4-core/lib/openzeppelin-contracts/",
+        "solmate/=node_modules/@uniswap/v4-core/lib/solmate/"
+    ]
+}

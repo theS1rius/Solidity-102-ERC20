@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.3.0",
+    "@uniswap/v4-core": "^1.0.2"
+  },
+  "name": "solidity-102",
+  "version": "1.0.0",
+  "description": "## 學習檔案 主要檔案是\"contracts/Transaction.sol\"。",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theS1rius/Solidity-102-ERC20.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theS1rius/Solidity-102-ERC20/issues"
+  },
+  "homepage": "https://github.com/theS1rius/Solidity-102-ERC20#readme"
+}

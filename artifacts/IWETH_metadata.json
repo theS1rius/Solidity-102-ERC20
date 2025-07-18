@@ -9,180 +9,40 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_poolManager",
-						"type": "address"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "constructor"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "owner",
+						"name": "spender",
 						"type": "address"
 					},
 					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "USDC_ADDRESS",
-						"type": "address"
-					}
-				],
-				"name": "ContractDeployed",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "log",
-						"type": "string"
-					}
-				],
-				"name": "Log",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "user",
-						"type": "address"
-					},
-					{
-						"indexed": false,
 						"internalType": "uint256",
-						"name": "ethAmount",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "usdcAmount",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
-				"name": "SwapExecuted",
-				"type": "event"
-			},
-			{
-				"inputs": [],
-				"name": "POOLMANAGER",
+				"name": "approve",
 				"outputs": [
 					{
-						"internalType": "address",
+						"internalType": "bool",
 						"name": "",
-						"type": "address"
+						"type": "bool"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "USDC",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "USDC_ADDRESS",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "WETH",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "balanceOfETH",
-						"type": "uint256"
-					}
-				],
-				"name": "executeSwap",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "ethAmount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "usdcAmount",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getUserBalance",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "poolManager",
+				"name": "balanceOf",
 				"outputs": [
 					{
-						"internalType": "contract IPoolManager",
+						"internalType": "uint256",
 						"name": "",
-						"type": "address"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -190,7 +50,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "swapETHToUSDC",
+				"name": "deposit",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
@@ -198,54 +58,55 @@
 			{
 				"inputs": [
 					{
-						"internalType": "bytes",
-						"name": "data",
-						"type": "bytes"
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
 					}
 				],
-				"name": "unlockCallback",
+				"name": "transfer",
 				"outputs": [
 					{
-						"internalType": "bytes",
+						"internalType": "bool",
 						"name": "",
-						"type": "bytes"
+						"type": "bool"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"stateMutability": "payable",
-				"type": "receive"
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {
-				"unlockCallback(bytes)": {
-					"params": {
-						"data": "The data that was passed to the call to unlock"
-					},
-					"returns": {
-						"_0": "Any data that you want to be returned from the unlock call"
-					}
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {
-				"unlockCallback(bytes)": {
-					"notice": "Called by the pool manager on `msg.sender` when the manager is unlocked"
-				}
-			},
+			"methods": {},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Transaction.sol": "Transaction"
+			"contracts/Transaction.sol": "IWETH"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
